@@ -1,5 +1,7 @@
 project_id = "your-project-ref"
 
+# Stripe-related functions skip JWT verification because Stripe authenticates
+# via stripe-signature header instead.
 [functions.stripe-webhook]
 verify_jwt = false
 
@@ -14,3 +16,7 @@ verify_jwt = false
 
 [functions.cancel-subscription]
 verify_jwt = false
+
+# AI chat verifies the caller's Supabase JWT (default behavior).
+[functions.ai-chat]
+verify_jwt = true
