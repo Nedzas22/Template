@@ -1,0 +1,16 @@
+project_id = "your-project-ref"
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.check-stripe-purchase]
+verify_jwt = false
+
+[functions.sync-stripe-subscribers]
+verify_jwt = false
+
+[functions.customer-portal]
+verify_jwt = false
+
+[functions.cancel-subscription]
+verify_jwt = false
