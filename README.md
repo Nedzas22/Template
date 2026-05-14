@@ -78,20 +78,29 @@ supabase/
 
 1. Create a project at [supabase.com](https://supabase.com).
 2. Copy your project URL and anon key into `.env`.
-3. Create a `profiles` table with `user_id` (PK, FK to `auth.users.id`),
-   `display_name`, `avatar_url`, `created_at`. Add an RLS policy so users can
-   read/update their own row.
-4. (Optional, for billing) Create `stripe_subscribers` and
-   `user_subscriptions` tables — see the edge functions for the columns they
-   expect.
-5. Regenerate types: `supabase gen types typescript --project-id <ref> > src/integrations/supabase/types.ts`.
+3. Link the local project and push migrations:
+   ```sh
+   supabase link --project-ref <your-ref>
+   supabase db push
+   ```
+   This creates `profiles`, `stripe_subscribers`, `user_subscriptions`, and
+   `ai_token_usage` tables with RLS policies and an auto-profile trigger on
+   signup. See `supabase/migrations/`.
+4. Regenerate types: `supabase gen types typescript --project-id <ref> > src/integrations/supabase/types.ts`.
 
-## Setting up Stripe (optional)
+## Setting up Stripe
 
-1. Add `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET` as Supabase function
-   secrets.
-2. Deploy the functions: `supabase functions deploy stripe-webhook` etc.
-3. Point Stripe at `https://<project>.supabase.co/functions/v1/stripe-webhook`.
+Each product runs against its own standalone Stripe account (venture studio
+model — no Connect platform needed).
+
+1. Create products + prices in the Stripe dashboard.
+2. Set function secrets:
+   ```sh
+   supabase secrets set STRIPE_SECRET_KEY=sk_live_...
+   supabase secrets set STRIPE_WEBHOOK_SECRET=whsec_...
+   ```
+3. Deploy the functions: `supabase functions deploy stripe-webhook` etc.
+4. Point Stripe webhook at `https://<project>.supabase.co/functions/v1/stripe-webhook`.
 
 The included edge functions are starting points — open each `index.ts` and
 replace the TODOs with logic for your product.
