@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { product } from "@/config/product";
 
 interface LogoProps {
   variant?: "light" | "dark";
@@ -16,7 +17,7 @@ const Logo = ({ variant = "light", size = "default" }: LogoProps) => {
         variant === "dark" ? "text-white" : "text-foreground"
       )}
     >
-      Template
+      {product.name}
     </span>
   );
 };

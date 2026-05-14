@@ -1,3 +1,5 @@
+import { product } from "@/config/product";
+
 const RefundPolicy = () => {
   return (
     <main className="flex-1 px-4 py-8 md:px-6 md:py-16">
@@ -7,8 +9,7 @@ const RefundPolicy = () => {
         </h1>
 
         <p className="mb-8 text-base leading-relaxed text-muted-foreground md:text-lg">
-          Replace this page with your product's refund policy. The structure below is a starting
-          point — customize the eligibility, timing, and contact details to match your business.
+          This page describes the refund policy for {product.name} ({product.domain}).
         </p>
 
         <section className="mb-8">
@@ -16,7 +17,8 @@ const RefundPolicy = () => {
             Eligibility
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            Describe who qualifies for a refund and under what conditions.
+            New paid subscriptions are eligible for a refund if you have not made substantial use
+            of the service. Refunds are issued at our discretion.
           </p>
         </section>
 
@@ -25,7 +27,7 @@ const RefundPolicy = () => {
             Refund window
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            State your refund window (for example, 14 days from purchase).
+            Refund requests must be submitted within 14 days of the original charge.
           </p>
         </section>
 
@@ -34,7 +36,11 @@ const RefundPolicy = () => {
             Contact
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            Add your support email so users can request a refund.
+            To request a refund, email{" "}
+            <a className="underline" href={`mailto:${product.legal.supportEmail}`}>
+              {product.legal.supportEmail}
+            </a>{" "}
+            with your account email and the charge date.
           </p>
         </section>
       </div>

@@ -1,3 +1,5 @@
+import { product } from "@/config/product";
+
 const TermsOfService = () => {
   return (
     <main className="flex-1 px-4 py-8 md:px-6 md:py-16">
@@ -7,8 +9,8 @@ const TermsOfService = () => {
         </h1>
 
         <p className="mb-8 text-base leading-relaxed text-muted-foreground md:text-lg">
-          Replace this page with your product's terms of service. The sections below outline a
-          typical structure — adapt them to your business model.
+          These terms apply to your use of {product.name} ({product.domain}), operated by{" "}
+          {product.legal.companyName}.
         </p>
 
         <section className="mb-8">
@@ -16,7 +18,8 @@ const TermsOfService = () => {
             Use of the service
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            Describe acceptable use, account responsibilities, and prohibited activities.
+            You are responsible for activity on your account. You agree not to abuse the service,
+            attempt to break our security, or use it for unlawful purposes.
           </p>
         </section>
 
@@ -25,7 +28,9 @@ const TermsOfService = () => {
             Billing
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            Explain pricing, billing cycles, and how to cancel.
+            Paid plans are billed monthly via Stripe and renew automatically until cancelled. You
+            can cancel at any time from your profile and retain access until the end of the
+            current billing period.
           </p>
         </section>
 
@@ -34,7 +39,9 @@ const TermsOfService = () => {
             Disclaimers and liability
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            Add legal disclaimers, limitation of liability, and warranty information.
+            The service is provided "as is" without warranty. To the extent permitted by law,{" "}
+            {product.legal.companyName} is not liable for indirect damages arising from your use
+            of the service. These terms are governed by the laws of {product.legal.jurisdiction}.
           </p>
         </section>
 
@@ -43,7 +50,11 @@ const TermsOfService = () => {
             Contact
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            Add your contact details for legal enquiries.
+            Questions about these terms? Email{" "}
+            <a className="underline" href={`mailto:${product.legal.supportEmail}`}>
+              {product.legal.supportEmail}
+            </a>
+            .
           </p>
         </section>
       </div>

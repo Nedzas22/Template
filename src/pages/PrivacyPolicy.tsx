@@ -1,3 +1,5 @@
+import { product } from "@/config/product";
+
 const PrivacyPolicy = () => {
   return (
     <main className="flex-1 px-4 py-8 md:px-6 md:py-16">
@@ -7,8 +9,7 @@ const PrivacyPolicy = () => {
         </h1>
 
         <p className="mb-8 text-base leading-relaxed text-muted-foreground md:text-lg">
-          Replace this page with your product's privacy policy. The sections below outline a
-          typical structure — adapt them to the data you actually collect.
+          This page describes how {product.name} ({product.domain}) collects and uses your data.
         </p>
 
         <section className="mb-8">
@@ -16,7 +17,9 @@ const PrivacyPolicy = () => {
             Information we collect
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            Describe what user data you collect (e.g. email, profile data, payment metadata).
+            We collect your email address and any profile data you provide. If you subscribe to a
+            paid plan, our payment processor (Stripe) handles your payment details — we never see
+            your card information.
           </p>
         </section>
 
@@ -25,7 +28,8 @@ const PrivacyPolicy = () => {
             How we use information
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            Explain what you do with that data (operate the service, billing, support).
+            We use your data to operate the service, process billing, and provide support. We do
+            not sell or share your personal data with third parties for advertising.
           </p>
         </section>
 
@@ -34,7 +38,8 @@ const PrivacyPolicy = () => {
             Third parties
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            List the third-party services you use (Supabase, Stripe, analytics, etc.).
+            We rely on the following services: Supabase (database and authentication), Stripe
+            (billing), and analytics providers for product usage statistics.
           </p>
         </section>
 
@@ -43,7 +48,11 @@ const PrivacyPolicy = () => {
             Contact
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            Add your support email for privacy enquiries.
+            For privacy enquiries, email{" "}
+            <a className="underline" href={`mailto:${product.legal.supportEmail}`}>
+              {product.legal.supportEmail}
+            </a>
+            .
           </p>
         </section>
       </div>
