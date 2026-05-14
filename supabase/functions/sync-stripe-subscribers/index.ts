@@ -19,6 +19,18 @@ serve(async (req) => {
   }
 
   try {
+    // Admin-only function — protected by a static bearer token.
+    // Generate: openssl rand -hex 32
+    const syncSecret = Deno.env.get("SYNC_SECRET");
+    if (!syncSecret) throw new Error("SYNC_SECRET not set");
+    const authHeader = req.headers.get("authorization") ?? "";
+    if (authHeader !== `Bearer ${syncSecret}`) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeKey) throw new Error("STRIPE_SECRET_KEY not set");
 
