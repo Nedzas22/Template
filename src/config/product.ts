@@ -1,31 +1,13 @@
 // Single source of truth for product-specific copy and identity.
 //
-// After cloning the template, edit this file (or let scripts/init-product.ts
-// populate it) and the marketing pages, legal pages, header, footer, and
-// analytics will all pick up the new values.
+// After cloning the template, edit this file (or let spawn-product populate
+// it) and the marketing pages, legal pages, header, footer, and analytics
+// will all pick up the new values.
 //
 // Anything secret (AI prompts, API keys) lives in Supabase function secrets,
 // NOT here — this file ships to the browser bundle.
 
-export type PricingTier = {
-  id: string;
-  name: string;
-  monthlyPrice: number;
-  currency: string;
-  stripePriceId: string;
-  features: string[];
-  highlighted?: boolean;
-};
-
-export type Feature = {
-  title: string;
-  body: string;
-};
-
-export type FaqItem = {
-  question: string;
-  answer: string;
-};
+import type { Feature, FaqItem, PricingTier } from "./product.types";
 
 export const product = {
   slug: import.meta.env.VITE_PRODUCT_SLUG ?? "template",
